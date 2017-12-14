@@ -18,7 +18,7 @@ public class XMLWriter {
     public void write(Node rootNode) throws ParserConfigurationException {
         Document dom = createEmptyDocument();
         Element rootElement = dom.createElement(rootNode.getType());
-        rootNode.getChildren().forEach(child -> createChildElement(dom, rootElement, rootNode));
+        rootNode.getChildren().forEach(child -> createChildElement(dom, rootElement, child));
         dom.appendChild(rootElement);
         try {
             Transformer tr = buildTransformer();
@@ -47,6 +47,7 @@ public class XMLWriter {
         tr.setOutputProperty(OutputKeys.METHOD, "xml");
         tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+        tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "gedcom.dtd");
         return tr;
     }
 
