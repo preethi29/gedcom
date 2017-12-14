@@ -56,7 +56,11 @@ public class XMLWriter {
             element.setAttribute("id", node.getId());
         }
         if (node.getValue() != null) {
-            element.setAttribute("value", node.getValue());
+            if (node.getChildren().isEmpty()) {
+                element.appendChild(dom.createTextNode(node.getValue()));
+            } else {
+                element.setAttribute("value", node.getValue());
+            }
         }
         node.getChildren().forEach(child -> createChildElement(dom, element, child));
         rootEle.appendChild(element);

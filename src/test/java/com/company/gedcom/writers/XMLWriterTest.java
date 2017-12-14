@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.dom.DOMSource;
@@ -44,7 +45,7 @@ public class XMLWriterTest {
     }
 
     @Test
-    public void shouldCreateChildElementsWithIdAndValueUnderRootElement() throws Exception {
+    public void shouldCreateChildElementsWithIdUnderRootElement() throws Exception {
         Element mockRootElement = mock(Element.class);
         Node child = new Node(1, null, "name", "Preethi");
         Node node = new Node(0, "@IN001@", "INDI", null);
@@ -58,10 +59,38 @@ public class XMLWriterTest {
 
         verify(mockRootElement).appendChild(nodeElement);
         verify(nodeElement).setAttribute("id", "@IN001@");
-        verify(nodeElement, never()).setAttribute("value", child.getValue());
         verify(nodeElement).appendChild(childElement);
         verify(childElement, never()).setAttribute("id", child.getId());
-        verify(childElement).setAttribute("value", "Preethi");
+    }
+
+
+    @Test
+    public void shouldAddValueAsAttributeIfChildrenArePresent() throws Exception {
+        Node node = new Node(1, null, "name", "Preethi");
+        node.addChild(new Node(2, "first"));
+        Element nodeElement = mock(Element.class);
+        when(document.createElement("name")).thenReturn(nodeElement);
+
+        xmlWriter.createChildElement(document, mock(Element.class), node);
+
+        verify(nodeElement, times(1)).appendChild(any());
+        verify(nodeElement).setAttribute("value", "Preethi");
+    }
+
+
+    @Test
+    public void shouldAddValueAsTextNodeIfChildrenIsEmpty() throws Exception {
+        Element mockRootElement = mock(Element.class);
+        Node node = new Node(1, null, "name", "Preethi");
+        Element nodeElement = mock(Element.class);
+        when(document.createElement("name")).thenReturn(nodeElement);
+        Text text = mock(Text.class);
+        when(document.createTextNode("Preethi")).thenReturn(text);
+
+        xmlWriter.createChildElement(document, mockRootElement, node);
+
+        verify(nodeElement).appendChild(text);
+        verify(nodeElement, never()).setAttribute("value", "Preethi");
     }
 
 
