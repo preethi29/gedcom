@@ -18,6 +18,7 @@ public class XMLWriter {
     public void write(Node rootNode) throws ParserConfigurationException {
         Document dom = createEmptyDocument();
         Element rootElement = dom.createElement(rootNode.getType());
+        rootNode.getChildren().forEach(child -> createChildElement(dom, rootElement, rootNode));
         dom.appendChild(rootElement);
         try {
             Transformer tr = buildTransformer();
@@ -49,4 +50,12 @@ public class XMLWriter {
         return tr;
     }
 
+    void createChildElement(Document dom, Element rootEle, Node node) {
+        Element element = dom.createElement(node.getType());
+        if (node.getId() != null) {
+            element.setAttribute("id", node.getId());
+        }
+        node.getChildren().forEach(child -> createChildElement(dom, element, child));
+        rootEle.appendChild(element);
+    }
 }
