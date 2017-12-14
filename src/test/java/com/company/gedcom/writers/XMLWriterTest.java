@@ -44,9 +44,9 @@ public class XMLWriterTest {
     }
 
     @Test
-    public void shouldCreateChildElementsWithIdUnderRootElement() throws Exception {
+    public void shouldCreateChildElementsWithIdAndValueUnderRootElement() throws Exception {
         Element mockRootElement = mock(Element.class);
-        Node child = new Node(1, "name");
+        Node child = new Node(1, null, "name", "Preethi");
         Node node = new Node(0, "@IN001@", "INDI", null);
         node.addChild(child);
         Element nodeElement = mock(Element.class);
@@ -56,9 +56,13 @@ public class XMLWriterTest {
 
         xmlWriter.createChildElement(document, mockRootElement, node);
 
-        verify(nodeElement).setAttribute("id", "@IN001@");
         verify(mockRootElement).appendChild(nodeElement);
+        verify(nodeElement).setAttribute("id", "@IN001@");
+        verify(nodeElement, never()).setAttribute("value", child.getValue());
         verify(nodeElement).appendChild(childElement);
         verify(childElement, never()).setAttribute("id", child.getId());
+        verify(childElement).setAttribute("value", "Preethi");
     }
+
+
 }
