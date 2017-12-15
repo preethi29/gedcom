@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
 
 public class GedcomFileParserTest {
 
@@ -27,6 +26,20 @@ public class GedcomFileParserTest {
         List<Node> nodes = spyGedcomFileParser.parseGedcomFile("sample.txt");
 
         assertThat(nodes).containsOnly(node1, node2);
+    }
+
+    @Test
+    public void shouldIgnoreBlankLinesInFileInput() throws Exception {
+        String inputLine1 = "0 @I001@ INDI";
+        String inputLine2 = "              ";
+        doReturn(Stream.of(inputLine1, inputLine2)).when(spyGedcomFileParser).readLinesFromFile("sample.txt");
+        Node node1 = new Node(0, "@I001@", "indi", null);
+        doReturn(node1).when(spyGedcomFileParser).createNode(inputLine1);
+
+        List<Node> nodes = spyGedcomFileParser.parseGedcomFile("sample.txt");
+
+        verify(spyGedcomFileParser, never()).createNode(inputLine2);
+        assertThat(nodes).containsOnly(node1);
     }
 
     @Test
@@ -71,4 +84,5 @@ public class GedcomFileParserTest {
         assertThat(node.getId()).isNull();
         assertThat(node.getValue()).isNull();
     }
+
 }

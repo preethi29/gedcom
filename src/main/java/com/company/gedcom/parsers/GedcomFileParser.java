@@ -17,7 +17,7 @@ public class GedcomFileParser {
 
     public List<Node> parseGedcomFile(String fileName) throws IOException, URISyntaxException {
         Stream<String> inputLines = readLinesFromFile(fileName);
-        return inputLines.map(this::createNode).collect(toList());
+        return inputLines.filter(line -> !line.matches("\\s+")).map(this::createNode).collect(toList());
     }
 
     Node createNode(String line) {
