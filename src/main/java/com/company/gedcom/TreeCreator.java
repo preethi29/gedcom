@@ -8,7 +8,7 @@ public class TreeCreator {
 
     private static final String GEDCOM_TAG = "gedcom";
 
-    public Node formTree(List<Node> nodes) {
+    Node formTree(List<Node> nodes) {
         Node rootNode = new Node(-1, GEDCOM_TAG);
         createChild(rootNode, 0, nodes);
         return rootNode;

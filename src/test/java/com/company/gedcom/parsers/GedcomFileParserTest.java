@@ -19,8 +19,8 @@ public class GedcomFileParserTest {
         String inputLine1 = "0 @I001@ INDI";
         String inputLine2 = "1 @I002@ INDI";
         doReturn(Stream.of(inputLine1, inputLine2)).when(spyGedcomFileParser).readLinesFromFile("sample.txt");
-        Node node1 = new Node(0, "@I001@", "INDI", null);
-        Node node2 = new Node(1, "@I002@", "INDI", null);
+        Node node1 = new Node(0, "@I001@", "indi", null);
+        Node node2 = new Node(1, "@I002@", "indi", null);
         doReturn(node1).when(spyGedcomFileParser).createNode(inputLine1);
         doReturn(node2).when(spyGedcomFileParser).createNode(inputLine2);
 
@@ -35,7 +35,7 @@ public class GedcomFileParserTest {
         Node node = spyGedcomFileParser.createNode("0 @I001@ INDI");
 
         assertThat(node.getLevel()).isEqualTo(0);
-        assertThat(node.getType()).isEqualTo("INDI");
+        assertThat(node.getType()).isEqualTo("indi");
         assertThat(node.getId()).isEqualTo("@I001@");
         assertThat(node.getValue()).isNull();
     }
@@ -46,7 +46,7 @@ public class GedcomFileParserTest {
         Node node = spyGedcomFileParser.createNode("1 NAME Preethi");
 
         assertThat(node.getLevel()).isEqualTo(1);
-        assertThat(node.getType()).isEqualTo("NAME");
+        assertThat(node.getType()).isEqualTo("name");
         assertThat(node.getId()).isNull();
         assertThat(node.getValue()).isEqualTo("Preethi");
     }
@@ -57,7 +57,7 @@ public class GedcomFileParserTest {
         Node node = spyGedcomFileParser.createNode("2 CHAN");
 
         assertThat(node.getLevel()).isEqualTo(2);
-        assertThat(node.getType()).isEqualTo("CHAN");
+        assertThat(node.getType()).isEqualTo("chan");
         assertThat(node.getId()).isNull();
         assertThat(node.getValue()).isNull();
     }

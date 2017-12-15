@@ -23,12 +23,15 @@ public class GedcomFileParser {
     Node createNode(String line) {
         String[] parts = line.split(" ", 3);
         Integer level = Integer.valueOf(parts[0]);
-        String idOrType = parts[1];
-        String valueOrType = parts.length > 2 ? parts[2] : null;
-        if (idOrType.length() <= MAX_TAG_LENGTH) {
-            return new Node(level, null, idOrType, valueOrType);
+        String id, type, value;
+        if (parts[1].length() <= MAX_TAG_LENGTH) {
+            type = parts[1].toLowerCase();
+            value = parts.length > 2 ? parts[2] : null;
+            return new Node(level, null, type, value);
         }
-        return new Node(level, idOrType, valueOrType, null);
+        id = parts[1];
+        type = parts.length > 2 ? parts[2].toLowerCase(): null;
+        return new Node(level, id, type, null);
     }
 
     Stream<String> readLinesFromFile(String fileName) throws IOException, URISyntaxException {
