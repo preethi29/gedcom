@@ -34,7 +34,7 @@ public class GedcomFileParser {
         return new Node(level, id, type, null);
     }
 
-    Stream<String> readLinesFromFile(String fileName) throws IOException, URISyntaxException {
-        return Files.lines(Paths.get(getClass().getClassLoader().getResource(fileName).toURI()));
+    Stream<String> readLinesFromFile(String filePath) throws IOException, URISyntaxException {
+        return Files.lines(Paths.get(filePath));
     }
 }
