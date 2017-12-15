@@ -21,7 +21,7 @@ public class GedcomFileParser {
     }
 
     Node createNode(String line) {
-        String[] parts = line.split(" ", 3);
+        String[] parts = line.split("\\s+", 3);
         Integer level = Integer.valueOf(parts[0]);
         String id, type, value;
         if (parts[1].length() <= MAX_TAG_LENGTH) {

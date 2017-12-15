@@ -61,4 +61,14 @@ public class GedcomFileParserTest {
         assertThat(node.getId()).isNull();
         assertThat(node.getValue()).isNull();
     }
+
+    @Test
+    public void shouldParseLevelAndTagWhenVariableWhitespaceIsPresent() throws Exception {
+        Node node = spyGedcomFileParser.createNode("2        CHAN");
+
+        assertThat(node.getLevel()).isEqualTo(2);
+        assertThat(node.getType()).isEqualTo("chan");
+        assertThat(node.getId()).isNull();
+        assertThat(node.getValue()).isNull();
+    }
 }
