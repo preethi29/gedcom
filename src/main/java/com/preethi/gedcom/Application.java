@@ -16,6 +16,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please specify the path of gedcom file:");
         String path = scanner.next();
+
         List<Node> nodes = new GedcomFileParser().parseGedcomFile(path);
         Node root = new TreeCreator().formTree(nodes);
         new XMLWriter().write(root);
