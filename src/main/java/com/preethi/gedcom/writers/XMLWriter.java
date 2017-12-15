@@ -13,9 +13,9 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class XMLWriter {
+public class XMLWriter implements OutputWriter{
 
-    public void write(Node rootNode) throws ParserConfigurationException {
+    public void write(Node rootNode) {
         Document dom = createEmptyDocument();
         Element rootElement = dom.createElement(rootNode.getType());
         rootNode.getChildren().forEach(child -> createChildElement(dom, rootElement, child));
