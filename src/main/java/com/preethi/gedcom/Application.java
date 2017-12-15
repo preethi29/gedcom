@@ -1,8 +1,8 @@
-package com.company.gedcom;
+package com.preethi.gedcom;
 
-import com.company.gedcom.models.Node;
-import com.company.gedcom.parsers.GedcomFileParser;
-import com.company.gedcom.writers.XMLWriter;
+import com.preethi.gedcom.models.Node;
+import com.preethi.gedcom.parsers.GedcomFileParser;
+import com.preethi.gedcom.writers.XMLWriter;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;

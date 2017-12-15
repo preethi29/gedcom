@@ -1,6 +1,6 @@
-package com.company.gedcom;
+package com.preethi.gedcom;
 
-import com.company.gedcom.models.Node;
+import com.preethi.gedcom.models.Node;
 
 import java.util.List;
 

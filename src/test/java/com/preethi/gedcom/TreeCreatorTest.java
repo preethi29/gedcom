@@ -1,7 +1,7 @@
-package com.company.gedcom;
+package com.preethi.gedcom;
 
 
-import com.company.gedcom.models.Node;
+import com.preethi.gedcom.models.Node;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

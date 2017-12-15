@@ -1,6 +1,6 @@
-package com.company.gedcom.parsers;
+package com.preethi.gedcom.parsers;
 
-import com.company.gedcom.models.Node;
+import com.preethi.gedcom.models.Node;
 import org.junit.Test;
 
 import java.util.List;

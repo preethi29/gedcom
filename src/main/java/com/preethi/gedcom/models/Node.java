@@ -1,4 +1,4 @@
-package com.company.gedcom.models;
+package com.preethi.gedcom.models;
 
 import java.util.ArrayList;
 import java.util.List;

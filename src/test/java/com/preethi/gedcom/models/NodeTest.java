@@ -1,4 +1,4 @@
-package com.company.gedcom.models;
+package com.preethi.gedcom.models;
 
 import org.junit.Test;
 

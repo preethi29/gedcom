@@ -1,6 +1,6 @@
-package com.company.gedcom.writers;
+package com.preethi.gedcom.writers;
 
-import com.company.gedcom.models.Node;
+import com.preethi.gedcom.models.Node;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
